@@ -38,7 +38,7 @@ type UserResponse struct {
 	CreatedAt string `json:"created_at" binding:"required"`
 	Email string `json:"email" binding:"required"`
 	Username string `json:"username" binding:"required"`
-	Role string `json:"role" binding:"required"`
+	// Role string `json:"role" binding:"required"`
 }
 
 type GoogleOAuthRequest struct {
@@ -209,7 +209,7 @@ func Me(db *gorm.DB) gin.HandlerFunc {
 		       ID:          strconv.Itoa(int(profileUser.ID)),
 		       CreatedAt:   profileUser.CreatedAt.Format("2006-01-02T15:04:05Z07:00"),
 		       Username: profileUser.Username,
-			   Role: profileUser.Role,
+			//    Role: profileUser.Role,
 		       Email: profileUser.Email,
 	       }
 
