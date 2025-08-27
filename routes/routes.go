@@ -9,10 +9,11 @@ import (
 )
 
 func SetupRoutes(r *gin.Engine, db *gorm.DB) {
-	// Public routes
-	r.POST("/register", controllers.Register(db))
-	r.POST("/login", controllers.Login(db))
-	r.POST("/auth/google-oauth", controllers.GoogleOAuth(db))
+		// Public routes
+		r.POST("/register", controllers.Register(db))
+		r.POST("/login", controllers.Login(db))
+		r.POST("/auth/google-oauth", controllers.GoogleOAuth(db))
+		r.GET("/check-username", controllers.CheckUsernameAvailability(db))
 
 	// Protected routes
 	api := r.Group("/api/v1")

@@ -246,8 +246,8 @@ func GoogleOAuth(db *gorm.DB) gin.HandlerFunc {
 	       // Check if user with this username already exists
 	       var usernameCheck models.ProfileUser
 	       if db.Where("username = ?", req.Username).First(&usernameCheck).Error == nil {
-		       // Username exists, modify it to make it unique
-		       req.Username = req.Username + "_" + req.GoogleID[:8]
+		       utils.ErrorResponse(c, http.StatusConflict, "This username is already taken. Please choose another username.", nil)
+		       return
 	       }
 	       // Create new profile user
 	       profileUser := models.ProfileUser{
