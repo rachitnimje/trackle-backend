@@ -237,6 +237,9 @@ func GoogleOAuth(db *gorm.DB) gin.HandlerFunc {
 			       utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to generate token", err)
 			       return
 		       }
+		       // Set cookie
+		       c.SetSameSite(http.SameSiteLaxMode)
+		       c.SetCookie("auth_token", token, 24*60*60, "/", "", false, true) // 24 hours
 		       utils.SuccessResponse(c, "Google OAuth login successful", map[string]interface{}{
 			       "token": token,
 			       "user":  existingProfile,
@@ -268,6 +271,9 @@ func GoogleOAuth(db *gorm.DB) gin.HandlerFunc {
 		       utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to generate token", err)
 		       return
 	       }
+	       // Set cookie
+	       c.SetSameSite(http.SameSiteLaxMode)
+	       c.SetCookie("auth_token", token, 24*60*60, "/", "", false, true) // 24 hours
 	       utils.SuccessResponse(c, "Google OAuth registration successful", map[string]interface{}{
 		       "token": token,
 		       "user":  profileUser,
